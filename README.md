@@ -8,33 +8,33 @@ Features
 
 Highly Available Infrastructure:
 
-Configured a Virtual Private Cloud (VPC) with public and private subnets across two availability zones for fault tolerance.
+  Configured a Virtual Private Cloud (VPC) with public and private subnets across two availability zones for fault tolerance.
 
-Deployed an Internet Gateway to enable public connectivity for VPC instances.
+  Deployed an Internet Gateway to enable public connectivity for VPC instances.
 
 Enhanced Security:
 
-Established Security Groups to act as network firewalls.
+  Established Security Groups to act as network firewalls.
 
-Hosted web servers (EC2 instances) in private subnets to prevent direct access from the Internet.
+  Hosted web servers (EC2 instances) in private subnets to prevent direct access from the Internet.
 
-Utilized AWS Certificate Manager (ACM) to secure application communications.
+  Utilized AWS Certificate Manager (ACM) to secure application communications.
 
 Scalability and Resilience:
 
-Leveraged an Application Load Balancer (ALB) and target group to distribute traffic across EC2 instances.
+  Leveraged an Application Load Balancer (ALB) and target group to distribute traffic across EC2 instances.
 
-Configured an Auto Scaling Group to manage EC2 instances dynamically, ensuring elasticity and fault tolerance.
+  Configured an Auto Scaling Group to manage EC2 instances dynamically, ensuring elasticity and fault tolerance.
 
-Enabled instances in private subnets to access the Internet via a NAT Gateway.
+  Enabled instances in private subnets to access the Internet via a NAT Gateway.
 
 Monitoring and Alerts:
 
-Configured Amazon Simple Notification Service (SNS) for notifications about activities within the Auto Scaling Group.
+  Configured Amazon Simple Notification Service (SNS) for notifications about activities within the Auto Scaling Group.
 
 Domain Management:
 
-Registered a custom domain name and configured a DNS record using Route 53.
+  Registered a custom domain name and configured a DNS record using Route 53.
 
 Architecture Overview
 
@@ -42,33 +42,33 @@ The architecture includes the following components:
 
 VPC Configuration:
 
-Public and private subnets in two availability zones.
+  Public and private subnets in two availability zones.
 
-Internet Gateway for public connectivity.
+  Internet Gateway for public connectivity.
 
 Network Security:
 
-Security Groups to allow only necessary traffic.
+  Security Groups to allow only necessary traffic.
 
-EC2 Instance Connect Endpoint for secure connections to public and private subnets.
+  EC2 Instance Connect Endpoint for secure connections to public and private subnets.
 
 Web Hosting:
 
-EC2 instances running Apache HTTP Server to serve the static website.
+  EC2 instances running Apache HTTP Server to serve the static website.
 
-Web servers located in private subnets.
+  Web servers located in private subnets.
 
 Load Balancing and Auto Scaling:
 
-Application Load Balancer for traffic distribution.
+  Application Load Balancer for traffic distribution.
 
-Auto Scaling Group for instance management.
+  Auto Scaling Group for instance management.
 
 Domain and Certificates:
 
-Domain registered and managed via Route 53.
+  Domain registered and managed via Route 53.
 
-SSL/TLS certificates provided by AWS Certificate Manager.
+  SSL/TLS certificates provided by AWS Certificate Manager.
 
 Deployment Steps
 
