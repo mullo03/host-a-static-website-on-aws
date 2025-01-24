@@ -6,13 +6,13 @@ This project demonstrates how to host a static HTML web application on AWS using
 
 Features
 
-Highly Available Infrastructure:
+1. Highly Available Infrastructure:
 
   Configured a Virtual Private Cloud (VPC) with public and private subnets across two availability zones for fault tolerance.
 
   Deployed an Internet Gateway to enable public connectivity for VPC instances.
 
-Enhanced Security:
+2. Enhanced Security:
 
   Established Security Groups to act as network firewalls.
 
@@ -20,7 +20,7 @@ Enhanced Security:
 
   Utilized AWS Certificate Manager (ACM) to secure application communications.
 
-Scalability and Resilience:
+3. Scalability and Resilience:
 
   Leveraged an Application Load Balancer (ALB) and target group to distribute traffic across EC2 instances.
 
@@ -28,17 +28,17 @@ Scalability and Resilience:
 
   Enabled instances in private subnets to access the Internet via a NAT Gateway.
 
-Monitoring and Alerts:
+4. Monitoring and Alerts:
 
   Configured Amazon Simple Notification Service (SNS) for notifications about activities within the Auto Scaling Group.
 
-Domain Management:
+5. Domain Management:
 
   Registered a custom domain name and configured a DNS record using Route 53.
 
 Architecture Overview
 
-The architecture includes the following components:
+1. The architecture includes the following components:
 
 VPC Configuration:
 
@@ -46,25 +46,25 @@ VPC Configuration:
 
   Internet Gateway for public connectivity.
 
-Network Security:
+2. Network Security:
 
   Security Groups to allow only necessary traffic.
 
   EC2 Instance Connect Endpoint for secure connections to public and private subnets.
 
-Web Hosting:
+3. Web Hosting:
 
   EC2 instances running Apache HTTP Server to serve the static website.
 
   Web servers located in private subnets.
 
-Load Balancing and Auto Scaling:
+4. Load Balancing and Auto Scaling:
 
   Application Load Balancer for traffic distribution.
 
   Auto Scaling Group for instance management.
 
-Domain and Certificates:
+5. Domain and Certificates:
 
   Domain registered and managed via Route 53.
 
