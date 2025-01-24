@@ -102,48 +102,48 @@ Create a VPC with public and private subnets in two availability zones.
 
 Attach an Internet Gateway to the VPC.
 
-Security Groups
+4. Security Groups
 
 Define Security Groups to allow HTTP (port 80) and HTTPS (port 443) traffic to the ALB and restrict access to EC2 instances.
 
-NAT Gateway
+5. NAT Gateway
 
 Deploy a NAT Gateway in a public subnet to allow private instances to access the Internet.
 
-Application Load Balancer
+6. Application Load Balancer
 
 Set up an ALB to handle incoming traffic and route it to the Auto Scaling Group's target instances.
 
-Auto Scaling Group
+7. Auto Scaling Group
 
 Configure an Auto Scaling Group to dynamically add or remove EC2 instances based on traffic demand.
 
-Route 53 Configuration
+8. Route 53 Configuration
 
 Register a domain name and set up a DNS record pointing to the ALB.
 
-Monitoring and Alerts
+9. Monitoring and Alerts
 
 Set up Amazon SNS to receive notifications for activities within the Auto Scaling Group, such as instance launches or terminations.
 
 Benefits of the Architecture
 
-High Availability: Utilization of multiple availability zones and an Auto Scaling Group ensures consistent website uptime.
+1. High Availability: Utilization of multiple availability zones and an Auto Scaling Group ensures consistent website uptime.
 
-Scalability: The system scales automatically based on traffic demand.
+2. Scalability: The system scales automatically based on traffic demand.
 
-Security: Private subnets, NAT Gateway, and Security Groups ensure that the web servers are protected.
+3. Security: Private subnets, NAT Gateway, and Security Groups ensure that the web servers are protected.
 
-Ease of Management: Automation with scripts and AWS services reduces manual effort.
+4. Ease of Management: Automation with scripts and AWS services reduces manual effort.
 
-Cost-Effectiveness: The architecture optimizes resource utilization by scaling dynamically.
+5. Cost-Effectiveness: The architecture optimizes resource utilization by scaling dynamically.
 
 Resources
 
-GitHub Repository
+1. GitHub Repository
 
-AWS Services Used: VPC, EC2, ALB, Auto Scaling Group, NAT Gateway, ACM, SNS, Route 53
+2. AWS Services Used: VPC, EC2, ALB, Auto Scaling Group, NAT Gateway, ACM, SNS, Route 53
 
 Contribution
 
-Contributions to improve this project are welcome! Please fork the repository and submit a pull request with your suggestions.
+1. Contributions to improve this project are welcome! Please fork the repository and submit a pull request with your suggestions.
