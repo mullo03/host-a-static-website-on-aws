@@ -1,149 +1,118 @@
 Host a Static Website on AWS
+This repository contains resources, scripts, and a reference diagram to deploy a static HTML web application on AWS. The project demonstrates how to design and implement a secure, scalable, and fault-tolerant architecture using AWS services.
 
-Project Overview
+1. Architecture Overview
+The project leverages the following AWS resources and design principles:
 
-This project demonstrates how to host a static HTML web application on AWS using various AWS services to achieve high availability, scalability, and enhanced security. The project utilizes an EC2 instance to serve the website and implements multiple AWS resources to ensure optimal performance and fault tolerance. The full deployment setup, including reference architecture and scripts, is available on GitHub.
+Virtual Private Cloud (VPC)
+a. Configured with both public and private subnets across two availability zones for fault tolerance and high availability.
+b. Ensures logical network isolation for resources.
 
-Features
+Internet Gateway (IGW)
+a. Facilitates connectivity between VPC instances and the wider Internet.
 
-1. Highly Available Infrastructure:
+Security Groups
+a. Act as network firewalls to control inbound and outbound traffic to instances.
 
-  Configured a Virtual Private Cloud (VPC) with public and private subnets across two availability zones for fault tolerance.
+Subnets
+a. Public Subnets: Used for infrastructure components like the NAT Gateway and Application Load Balancer.
+b. Private Subnets: Host web servers (EC2 instances) for enhanced security.
 
-  Deployed an Internet Gateway to enable public connectivity for VPC instances.
+NAT Gateway
+a. Allows instances in private subnets to securely access the Internet.
 
-2. Enhanced Security:
+EC2 Instances
+a. Host the static HTML website using Apache HTTP Server.
+b. Positioned in private subnets for improved security.
 
-  Established Security Groups to act as network firewalls.
+Application Load Balancer (ALB)
+a. Distributes incoming traffic evenly across EC2 instances in the Auto Scaling Group.
 
-  Hosted web servers (EC2 instances) in private subnets to prevent direct access from the Internet.
+Auto Scaling Group (ASG)
+a. Automatically manages the number of EC2 instances to ensure availability and scalability.
 
-  Utilized AWS Certificate Manager (ACM) to secure application communications.
+AWS Certificate Manager (ACM)
+a. Secures application communication using SSL/TLS certificates.
 
-3. Scalability and Resilience:
+Amazon Simple Notification Service (SNS)
+a. Sends notifications for events, such as Auto Scaling activities.
 
-  Leveraged an Application Load Balancer (ALB) and target group to distribute traffic across EC2 instances.
+Route 53
+a. Manages domain registration and DNS records for the hosted website.
 
-  Configured an Auto Scaling Group to manage EC2 instances dynamically, ensuring elasticity and fault tolerance.
+GitHub Repository
+a. Stores web application files for version control and collaboration.
 
-  Enabled instances in private subnets to access the Internet via a NAT Gateway.
-
-4. Monitoring and Alerts:
-
-  Configured Amazon Simple Notification Service (SNS) for notifications about activities within the Auto Scaling Group.
-
-5. Domain Management:
-
-  Registered a custom domain name and configured a DNS record using Route 53.
-
-Architecture Overview
-
-1. The architecture includes the following components:
-
-VPC Configuration:
-
-  Public and private subnets in two availability zones.
-
-  Internet Gateway for public connectivity.
-
-2. Network Security:
-
-  Security Groups to allow only necessary traffic.
-
-  EC2 Instance Connect Endpoint for secure connections to public and private subnets.
-
-3. Web Hosting:
-
-  EC2 instances running Apache HTTP Server to serve the static website.
-
-  Web servers located in private subnets.
-
-4. Load Balancing and Auto Scaling:
-
-  Application Load Balancer for traffic distribution.
-
-  Auto Scaling Group for instance management.
-
-5. Domain and Certificates:
-
-  Domain registered and managed via Route 53.
-
-  SSL/TLS certificates provided by AWS Certificate Manager.
-
-Deployment Steps
-
-1. Clone the GitHub Repository
-
-The website files and deployment scripts are hosted on GitHub. Clone the repository to access the necessary resources.
-
+2. Deployment Instructions
+A. Prerequisites
+AWS Account with sufficient permissions to create and manage resources.
+A registered domain name.
+Git installed locally.
+B. Steps
+Clone this repository to your local machine:
+bash
+Copy
+Edit
 git clone https://github.com/mullo03/host-a-static-website-on-aws.git
+Configure the AWS environment (VPC, subnets, security groups, IGW, and NAT Gateway). Use the reference diagram in this repository for guidance.
+Deploy an Auto Scaling Group with EC2 instances using the provided launch template script (see below).
+Configure the Application Load Balancer and target groups to distribute traffic to the EC2 instances.
+Secure communications with ACM by attaching an SSL/TLS certificate.
+Set up Route 53 to route traffic from the domain name to the Application Load Balancer.
+Enable notifications for the Auto Scaling Group using SNS.
+3. Launch Template Script
+Use the following script in the launch template to configure EC2 instances automatically:
 
-2. Configure the EC2 Launch Template
-
-The following script is used in the EC2 Launch Template to install required software, clone the website repository, and configure the Apache HTTP server:
-
+bash
+Copy
+Edit
 #!/bin/bash
+
+# Switch to the root user to gain full administrative privileges
 sudo su
+
+# Update all installed packages to their latest versions
 yum update -y
+
+# Install Apache HTTP Server
 yum install -y httpd
-yum install git -y
+
+# Change the current working directory to the Apache web root
 cd /var/www/html
+
+# Install Git
+yum install git -y
+
+# Clone the project GitHub repository to the current directory
 git clone https://github.com/mullo03/host-a-static-website-on-aws.git
+
+# Copy all files, including hidden ones, from the cloned repository to the Apache web root
 cp -R host-a-static-website-on-aws/. /var/www/html/
+
+# Remove the cloned repository directory to clean up unnecessary files
 rm -rf host-a-static-website-on-aws
+
+# Enable the Apache HTTP Server to start automatically at system boot
 systemctl enable httpd
+
+# Start the Apache HTTP Server to serve web content
 systemctl start httpd
+4. Features
+Scalability:
+a. Utilizes an Auto Scaling Group to maintain application performance during high traffic.
 
-3. Deploy AWS Resources
+Security:
+a. EC2 instances are hosted in private subnets.
+b. Traffic is secured with ACM SSL/TLS certificates.
 
-VPC Configuration
+High Availability:
+a. Leverages multiple Availability Zones.
+b. Ensures fault tolerance through ALB and ASG configurations.
 
-Create a VPC with public and private subnets in two availability zones.
+5. Resources
+Reference architecture diagram (available in this repository).
+AWS documentation for VPC, ALB, ASG, ACM, SNS, and Route 53.
+6. Contact
+For questions or feedback, feel free to open an issue in this repository.
 
-Attach an Internet Gateway to the VPC.
-
-4. Security Groups
-
-Define Security Groups to allow HTTP (port 80) and HTTPS (port 443) traffic to the ALB and restrict access to EC2 instances.
-
-5. NAT Gateway
-
-Deploy a NAT Gateway in a public subnet to allow private instances to access the Internet.
-
-6. Application Load Balancer
-
-Set up an ALB to handle incoming traffic and route it to the Auto Scaling Group's target instances.
-
-7. Auto Scaling Group
-
-Configure an Auto Scaling Group to dynamically add or remove EC2 instances based on traffic demand.
-
-8. Route 53 Configuration
-
-Register a domain name and set up a DNS record pointing to the ALB.
-
-9. Monitoring and Alerts
-
-Set up Amazon SNS to receive notifications for activities within the Auto Scaling Group, such as instance launches or terminations.
-
-Benefits of the Architecture
-
-1. High Availability: Utilization of multiple availability zones and an Auto Scaling Group ensures consistent website uptime.
-
-2. Scalability: The system scales automatically based on traffic demand.
-
-3. Security: Private subnets, NAT Gateway, and Security Groups ensure that the web servers are protected.
-
-4. Ease of Management: Automation with scripts and AWS services reduces manual effort.
-
-5. Cost-Effectiveness: The architecture optimizes resource utilization by scaling dynamically.
-
-Resources
-
-1. GitHub Repository
-
-2. AWS Services Used: VPC, EC2, ALB, Auto Scaling Group, NAT Gateway, ACM, SNS, Route 53
-
-Contribution
-
-1. Contributions to improve this project are welcome! Please fork the repository and submit a pull request with your suggestions.
+Let me know if you’d like to customize any sections further!
