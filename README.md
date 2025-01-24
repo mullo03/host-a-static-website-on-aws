@@ -46,27 +46,30 @@ a. Stores web application files for version control and collaboration.
 
 2. Deployment Instructions
 A. Prerequisites
+
 AWS Account with sufficient permissions to create and manage resources.
+
 A registered domain name.
+
 Git installed locally.
+
 B. Steps
-Clone this repository to your local machine:
-bash
-Copy
-Edit
+
+1. Clone this repository to your local machine:
+
 git clone https://github.com/mullo03/host-a-static-website-on-aws.git
-Configure the AWS environment (VPC, subnets, security groups, IGW, and NAT Gateway). Use the reference diagram in this repository for guidance.
-Deploy an Auto Scaling Group with EC2 instances using the provided launch template script (see below).
-Configure the Application Load Balancer and target groups to distribute traffic to the EC2 instances.
-Secure communications with ACM by attaching an SSL/TLS certificate.
-Set up Route 53 to route traffic from the domain name to the Application Load Balancer.
-Enable notifications for the Auto Scaling Group using SNS.
-3. Launch Template Script
+
+2. Configure the AWS environment (VPC, subnets, security groups, IGW, and NAT Gateway). Use the reference diagram in this repository for guidance.
+
+3. Deploy an Auto Scaling Group with EC2 instances using the provided launch template script (see below).
+4. Configure the Application Load Balancer and target groups to distribute traffic to the EC2 instances.
+5. Secure communications with ACM by attaching an SSL/TLS certificate.
+6. Set up Route 53 to route traffic from the domain name to the Application Load Balancer.
+7. Enable notifications for the Auto Scaling Group using SNS.
+   
+Launch Template Script
 Use the following script in the launch template to configure EC2 instances automatically:
 
-bash
-Copy
-Edit
 #!/bin/bash
 
 # Switch to the root user to gain full administrative privileges
@@ -98,7 +101,8 @@ systemctl enable httpd
 
 # Start the Apache HTTP Server to serve web content
 systemctl start httpd
-4. Features
+
+Features
 Scalability:
 a. Utilizes an Auto Scaling Group to maintain application performance during high traffic.
 
@@ -110,10 +114,11 @@ High Availability:
 a. Leverages multiple Availability Zones.
 b. Ensures fault tolerance through ALB and ASG configurations.
 
-5. Resources
+Resources
 Reference architecture diagram (available in this repository).
 AWS documentation for VPC, ALB, ASG, ACM, SNS, and Route 53.
-6. Contact
+
+Contact
 For questions or feedback, feel free to open an issue in this repository.
 
 Let me know if you’d like to customize any sections further!
